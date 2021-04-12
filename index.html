@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nifty PM Theme Guidelines and Documentation</title>
+	<style>
+		body{margin: 0; font-family: sans-serif;}
+		body, body *{box-sizing: border-box;}
+		a{text-decoration: none;}
+		.main-container{
+		  display: flex;
+		}
+		.main-container > div:first-child{ width: 28%; background: #222; color: white; padding: 3% 3% 0 3%; position: relative; }
+		.sidebar-container{ position: sticky; top: 25px; height: 100vh; overflow: scroll; padding-bottom: 3%; }
+		.main-container > div:first-child h2{margin-top: 0;}
+		.main-container > div:first-child ul{ padding: 0; list-style: none; }
+		.main-container > div:first-child li{ line-height: 2.5em; }
+		.main-container > div:first-child a{color: white;}
+		.main-container > div:last-child{ width: 72%; padding: 3% 5%; }
+		.main-container > div:last-child h1{ margin-top: 0; }
+	</style>
+</head>
+<body>
+<div class="main-container">
+  <div class="left-sidebar">
+    <div class="sidebar-container">
+      <h2>TABLE OF CONTENTS</h2>
+      <ul>
+        <li><a href="#gutenberg">Gutenberg Editor</a></li>
+        <li><a href="#shortcodes">Shortcodes</a></li>
+        <li><a href="#yoast">Yoast</a></li>
+        <li><a href="#custom-fields">Custom Fields</a></li>
+        <li><a href="#editing-content">Editing Content</a></li>
+        <li><a href="#how-to-edit">How to Edit</a></li>
+        <li><a href="#html-sitemap">HTML Sitemap</a></li>
+        <li><a href="#adding-data-url">Adding Images and Iframe Embed</a></li>
+        <li><a href="#ajax-pages">AJAX Pages</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Nifty PM Theme Guidelines and Documetation</h1>
+    <h2 id="gutenberg">Gutenberg Editor</h2>
+    <p>The new Nifty theme uses the Gutenberg editor, which is now Wordpress&apos;s default editor. It has a different interface but coincides nicely with the development of our theme. It&apos;s use of blocks supports our system of shortcode usage (described in this document) and allows us several benefits not previously available to us. The Classic Editor plugin that has made Wordpress look the same for ages, which has been used on Nifty&apos;s theme up to this point, will be abandoning support in 2021/2022, so we will no longer rely on it going forward.</p>
+    <p>We use the block editor extensively for housing our shortcode sections.</p>
+    <p>Resources and extensive documentation on how to lean and use the new editor can be found in the following places:</p>
+    <ul>
+      <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-use-the-new-wordpress-block-editor/">Read this article</a> by WPBeginner</li>
+      <li><a href="https://www.youtube.com/watch?v=JjfrzGeB5_g&ab_channel=WPBeginner-WordPressTutorials">Watch this tutorial</a> on Youtube</li>
+    </ul>
+    <h2 id="shortcodes">Shortcodes</h2>
+    <p>Our new themes rely almost entirely off of shortcode functionality. Shortcodes are one way that Wordpress allows us to make the same design or use the same blocks over and over. They output the same HTML and CSS while allowing for content changes. There are two types of shortcodes: 1) standalone and 2) wrapping.</p>
+    <h3>Standalone Shortcodes</h3>
+    <p>Standalone shortcodes look like this:</p>
+    <p>[shortcode_name]</p>
+    <p>Standalone shortcodes are helpful for outputting static content or design that will rarely ever change from page to page.</p>
+    <h3>Wrapping Shortcodes</h3>
+    <p>Wrapping shortcodes will often look like this:</p>
+    <p>[SHORTCODE_NAME]</p>
+    <p>text text text</p>
+    <p>[/SHORTCODE_NAME]</p>
+    <p>The difference in a wrapping shortcode from a standalone shortcode is that the wrapping shortcode will output the content between its tags. We use wrapping shortcodes to give PMs control over the content they will see on the front end. In our current practices, we will capitalize all wrapping shortcodes to show the distinction (though this has not always been the case in older iterations of our theme).</p>
+    <h3>Attributes</h3>
+    <p>Attributes are another way of giving design and content control to PMs. Attributes will look like this:</p>
+    <ul>
+      <li>Standalone shortcode:<br>[shortcode_name title=&quot;something&quot; color=&quot;blue&quot; button_text=&quot;Call Today&quot;]<br><br></li>
+      <li>Wrapping Shortcodes:<br>[SHORTCODE_NAME heading=&quot;Don&apos;t Wait&quot; bg_img=&quot;89&quot; text_color=&quot;green&quot;]<br>Content content content<br>[/SHORTCODE_NAME]</li>
+    </ul>
+    <p>Shortcode attributes are pre-defined by the developer. They correspond to what you see on the front end and give PMs the control over different parts of a block template. All attributes must have and equals sign (=) followed by double or single quote marks that open and close (&apos; &apos;) or (&quot; &quot;).</p>
+    <p>Any punctuation or HTML using quotes or double quotes should be encoded as to not mess up the shortcode rendering. This can be done by replacing them with the following characters:</p>
+    <ul>
+      <li>Single quote &ndash; &amp;apos;</li>
+      <li>Double quote &ndash; &amp;quot;</li>
+    </ul>
+    <h2 id="yoast">Yoast</h2>
+    <p>Yoast is still used and functions the same across Wordpress editors, both Classic and Gutenberg.</p>
+    <h2 id="custom-fields">Custom Fields</h2>
+    <p>Custom fields are a Wordpress feature that allow for even more control. These are found at the bottom of the page and will look like this:</p>
+    <p><br></p>
+    <p>These are used by developers in certain circumstances, as well as our developer-created, custom fields. These are used sparingly, but when they are used they will be explained per project to PMs and coordinated among the developers.</p>
+    <h2 id="editing-content">Editing Content</h2>
+    <p>To edit content on the Nifty-created themes, it may require editing PHP pages (PHP is a backend coding language. Even if you don&apos;t completely understand PHP or HTML, you should be able to make these edits fairly simply without breaking anything. The following sections explain how to do this efficiently.</p>
+    <h3>Theme Editor No-Touch Files</h3>
+    <p>Most of the development for a site
+      <meta charset="utf-8"><span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">, which includes content,&nbsp;</span> is created in the theme editor under the &quot;Appearance&quot; menu sidebar of the Wordpress backend. This includes directories (folders) and PHP files.</p>
+    <p>The following are directories and files which are off-limits to PMs or unauthorized personnel:</p>
+    <ul>
+      <li>Stylesheet (style.css)</li>
+      <li>Theme Functions (functions.php)</li>
+      <li>404 Template (404.php)</li>
+      <li>Theme Footer (footer.php)</li>
+      <li>Theme Header (header.php)</li>
+      <li>includes (folder and contents)</li>
+      <li>Main Index Template (index.php)</li>
+      <li>Single Page (page.php)</li>
+      <li>Search Results (search.php)</li>
+      <li>Single Post (post.php)</li>
+      <li>template-parts/ada-components/ (folder and contents)</li>
+      <li>template-parts/content/ (folder and contents)</li>
+      <li>template-parts/blog-styles.php</li>
+      <li>Any AJAX files</li>
+      <li>Any AJAX pages</li>
+    </ul>
+    <p>No explanation for these files will be provided in this documentation but are copiously explained in our <a href="https://niftydevdocs.github.io/nifty-dev-coding-guide/">extensive developer documentation&nbsp;</a>for anyone who takes and interest. Manipulating these files without developer experience can cause different elements of the site to break or can cause the entire site to crash. These are used to control the overall site and are important, but don&apos;t control individual content or block styles.</p>
+    <p>Included among these is now the header.php and footer.php. The functionality of these files is included elsewhere (explained in the next section).</p>
+    <h3>Them Editor Do-Touch Files</h3>
+    <p>The following backend, theme editor directores and PHP pages are safe for your access. Each will be explained below:</p>
+    <ul>
+      <li>Pm-safe (folder and contents)<ul>
+        <li>after-body-scripts.php</li>
+        <li>footer-scripts.php</li>
+        <li>header-scripts.php</li>
+        </ul>
+      </li>
+      <li>template-parts/blocks</li>
+      <li>template-parts/pages (folder and contents)</li>
+      <li>template-parts/section (folder and contents)</li>
+    </ul>
+    <h4>PM-Safe</h4>
+    <p>The pm-safe directory contains three files: 1) after-body-scripts.php, 2) footer-scripts.php, and 3) header-scripts.php.</p>
+    <p><strong>header-scripts.php:&nbsp;</strong>If you have any extra code that goes in the header of a site, including things such as analytics, meta tags, or Facebook tracking (among other codes and scripts), they will be placed here instead of the header.php (as it was previously). This PHP file is being pulled directly into the header so the header.php file doesn&apos;t need to be edited directly.</p>
+    <p><strong>footer-scripts.php:&nbsp;</strong>If you have any extra code that goes in the footer of a site, such as Callrail or other scripts, those will be placed here instead of the footer.php (as it was previously). This PHP file is being pulled directly into the footer so the footer.php file doesn&apos;t need to be edited directly.</p>
+    <p><strong>after-body-scripts.php:&nbsp;</strong>There are a few scripts that require loading directly after the &lt;body&gt; tag of a site. Any scripts requiring this, including some Facebook tracking scripts and Google analytics integrations, will go in this file and will be included in the correct spot across the site.</p>
+    <h4>template-parts/block (folder and contents)</h4>
+    <p>This directory and its contents contains content for blocks used across the site. If any content is needed to be edited within a block, those blocks may be accessed and changed here.</p>
+    <h4>template-parts/pages (folder and contents)</h4>
+    <p>Individual pages often have their own design templates and blocks which are not used on other parts of the site. Those blocks of content will be found here and can be edited as needed.</p>
+    <h4>template-parts/section (folder and contents)</h4>
+    <p>Most shortcodes will be created in this directory. They are usually divided into three main sections, but there may be more depending on the project:</p>
+    <ol>
+      <li><strong>Homepage</strong>: These are shortcodes that are almost exclusively created for the homepage.</li>
+      <li><strong>Internal</strong>: These are shortcodes that are almost exclusively created for internal pages.</li>
+      <li><strong>Custom</strong>: These are shortcodes that don&apos;t quite fit the &quot;blocks&quot; category, a &quot;page&quot; category, the &quot;homepage&quot; category, or the &quot;internal&quot; category but are still needed for creating the site.</li>
+    </ol>
+    <h2 id="how-to-edit">How to Know Where to Edit Content</h2>
+    <p>All content on our new theme will follow a simple process so you can find and edit content easily. Content is created in three parts: 1) shortcode name, 2) the shortcode&apos;s php page, and 3) the HTML class. These are all named the same so you can easily find where each piece of content is located.</p>
+    <p>For instance, if you see a banner image on the homepage and see that the overall section is labeled with the class &quot;home-banner&quot;, you will see that the shortcode is called &quot;[home_banner]&quot;. The php on the backend will be called &quot;home-baner.php&quot;. If you needed to make an adjustment to the home banner, you would simply navigate your way back to the PHP page where you could make that update.</p>
+    <p>There is a simple process to follow whenever you want to find where content is to edit it.</p>
+    <ol>
+      <li>Use developer tools on the front-end to see what the section class is called.</li>
+      <li>Find the content in the Gutenberg block editor for that section (it will be titled the same thing as the class on the front-end).</li>
+      <li>Change the attribute or adjust the wrapping shortcode content if it is there.</li>
+      <li>If the content isn&apos;t there, find the corresponding shortcode in the backend files.</li>
+    </ol>
+    <p>For your convenience, if you want to edit content &ndash;</p>
+    <ul>
+      <li>On the homepage:<ul>
+        <li>corresponding shortcode name will be [home_{name}]</li>
+        <li>corresponding PHP page will be home-{name}.php.<br><br></li>
+        </ul>
+      </li>
+      <li>On an internal page:<ul>
+        <li>corresponding shortcode name will be [internal_{name}]</li>
+        <li>corresponding PHP page will be internal-{name}.php.<br><br></li>
+        </ul>
+      </li>
+      <li>On a main page (like contact or practice areas):<ul>
+        <li>corresponding shortcode name will be [page_{name}]</li>
+        <li>corresponding PHP page will be page-{name}.php.<br><br></li>
+        </ul>
+      </li>
+      <li>Controlled by a custom shortcode/section:<ul>
+        <li>corresponding shortcode name will be [custom_{name}]</li>
+        <li>corresponding PHP page will be custom-{name}.php.<br><br></li>
+        </ul>
+      </li>
+      <li>Controlled by a block shortcode/section:<ul>
+        <li>corresponding shortcode name will be [block_{name}]</li>
+        <li>corresponding PHP page will be block-{name}.php.</li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="html-sitemap">HTML Sitemap</h2>
+    <p>As part of our new theme, there is an out-of-the-box shortcode we created to include an HTML sitemap called [nifty_sitemap]. This will include all pages and posts on the backend of a site, including nofollow and noindex pages. To exclude any page from the HTML sitemap, add the attribute exclude=&quot;&quot; and include any page ids you do not want to include in the sitemap, separated by a comma. Your shortcode will likely look something like this:<br><br>[nifty_sitemap exclude=&quot;977, 960, 882, 979, 1335&quot;]</p>
+    <h2 id="adding-data-url">Adding Inline Images and Iframes</h2>
+    <p>If you are adding content to a blog or page and want to include an iframe video/embed or image, you will want to change the &quot;src&quot; to &quot;data-url&quot; instead. This assists in our lazy loading processes and will ensure higher page speed scores for those pages with embeds</p>
+    <h2 id="ajax-pages">AJAX Pages</h2>
+    <p>A newly developed site will likely have a few noindex, nofollow pages that are titled &quot;AJAX: {Name of the Page}&quot;. These should be left untouched. They are being used to control different aspects of the site and to facilitate lazy loading. They shouldn&apos;t appear in the XML or HTML sitemap of any site and should be excluded in the nifty_sitemap shortcode (though the developers will usually do this for you before launch).</p>
+  </div>
+</div>
+</body>
+</html>
